@@ -46,10 +46,20 @@ public class Application {
         return cnt;
     }
 
+    // 볼 수 카운팅
+    public static int CountBall(){
+        int cnt = 0;
+        for(int x : checkList){
+            if(arr[x] == 1) cnt++;
+        }
+        return cnt;
+    }
 
     public static void main(String[] args) {
         String answer = GetAnswer();
         int num = InputNum();
-        System.out.println(CountStrike(answer, String.valueOf(num)));
+        int strikeCnt = CountStrike(answer, String.valueOf(num));
+        int ballCnt = CountBall();
+
     }
 }
