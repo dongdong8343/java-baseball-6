@@ -1,17 +1,25 @@
 package baseball;
 import camp.nextstep.edu.missionutils.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
     static int[] arr = new int[10];
-    static String answer = "";
-    public static void GetAnswer(){
+    static List<Integer> checkList = new ArrayList<>();
+    // 랜덤 3자리 수 생성
+    public static String GetAnswer(){
+        String answer = "";
         while(answer.length() < 3){
             int num = Randoms.pickNumberInRange(1, 9);
             if(arr[num] == 1) continue;
             arr[num] = 1;
             answer += num;
         }
+        System.out.println(answer);
+        return answer;
     }
-    // 플레이어 수 입력 -> 잘못 입력하면 예외 처리
+    // 플레이어 수 입력
     public static int InputNum(){
         int num;
         System.out.print("숫자를 입력해주세요 : ");
@@ -26,8 +34,22 @@ public class Application {
         }
         return num;
     }
+    // 스트라이크 수 카운팅
+    public static int CountStrike(String answer, String num){
+        int cnt = 0;
+
+        for(int i = 0; i < 3; i++){
+            if(answer.charAt(i) == num.charAt(i)) cnt++;
+            else checkList.add(Integer.parseInt(String.valueOf(num.charAt(i))));
+        }
+
+        return cnt;
+    }
+
+
     public static void main(String[] args) {
-        GetAnswer();
-        System.out.println(InputNum());
+        String answer = GetAnswer();
+        int num = InputNum();
+        System.out.println(CountStrike(answer, String.valueOf(num)));
     }
 }
