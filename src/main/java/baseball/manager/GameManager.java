@@ -16,18 +16,23 @@ public class GameManager {
 
     private BaseballNumber userNumber;
     private InputValidator inputValidator;
+    private UI ui;
+    private Judgment judgment;
+
     public GameManager() {
         inputValidator = new InputValidator();
+        ui = new UI();
+        judgment = new Judgment();
     }
 
     public void start() {
-        UI.INSTANCE.printStartMsg();
+        ui.printStartMsg();
 
         while (true) {
             Computer computer = new Computer();
 
             while(true){
-                String input = UI.INSTANCE.getInput();
+                String input = ui.getInput();
                 // 입력 수 검증하고 userNumber에 저장
                 if (this.inputValidator.isValidNumber(input)) {
                     List<Integer> checkedNumber = new ArrayList<>();
@@ -39,13 +44,13 @@ public class GameManager {
                     userNumber = new BaseballNumber(checkedNumber);
                 }
 
-                Hint hint = Judgment.INSTANCE.judge(userNumber.getNumber(), computer.getComputerNumber().getNumber());
-                UI.INSTANCE.printHint(hint.getHint());
+                Hint hint = judgment.judge(userNumber.getNumber(), computer.getComputerNumber().getNumber());
+                ui.printHint(hint.getHint());
                 if(hint.getHint().equals("3스트라이크" + "\n" + "3개의 숫자를 모두 맞히셨습니다! 게임 종료")){
                     break;
                 }
             }//end while
-            int isRestart = UI.INSTANCE.askRestart();
+            int isRestart = ui.askRestart();
             if(isRestart == QUIT) break;
         }//end while
     }

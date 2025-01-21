@@ -2,12 +2,10 @@ package baseball.ui;
 
 import java.util.Scanner;
 
-public enum UI {
-    INSTANCE;
-
+public class UI {
     private Scanner scanner;
 
-    private UI() {
+    public UI() {
         scanner = new Scanner(System.in);
     }
 

@@ -2,13 +2,8 @@ package baseball.domain;
 
 import java.util.List;
 
-public enum Judgment {
-    INSTANCE;
-
+public class Judgment {
     private static final int BALL_SIZE = 3;
-
-    private Judgment() {
-    }
 
     public Hint judge(List<Integer> userNumber, List<Integer> computerNumber){
         int strikeCount = 0, ballCount = 0;
